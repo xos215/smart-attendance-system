@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Attendance Management System</title>
+<link rel="stylesheet" href="style.css"><script src="theme.js"></script></head>
+<body>
+<header><div class="brand">Smart Attendance</div><div class="right"><span id="who"></span><button id="theme"></button></div></header>
+<main>
+<section id="auth" class="card narrow">
+  <div class="hero"><h2>Sign in</h2><p>Attendance management for teachers and students</p></div>
+  <div class="tabs"><button data-m="login" class="on">Login</button><button data-m="reg">Register</button></div>
+  <form id="loginForm">
+    <label>Unique Key<input id="lk" placeholder="TCH-XXXXXX or STU-XXXXXX" required></label>
+    <label>Password<input id="lp" type="password" required></label>
+    <button class="btn">Login</button>
+  </form>
+  <form id="regForm" hidden>
+    <label>Full Name<input id="rn" required></label>
+    <label>I am a<select id="rr"><option value="student">Student</option><option value="teacher">Teacher</option></select></label>
+    <label id="invW" hidden>Institution Invite Code<input id="ri"></label>
+    <label>Password (8+ chars, letters &amp; numbers)<input id="rp" type="password" required></label>
+    <button class="btn">Register &amp; get my unique key</button>
+  </form>
+  <p id="msg" role="alert"></p>
+</section>
+
+<section id="teacher" hidden>
+  <nav class="tabs"><button data-t="mark" class="on">Mark Attendance</button><button data-t="rep">Reports</button><button data-t="def">Defaulters</button></nav>
+  <div id="t-mark" class="card">
+    <div class="row"><label>Subject<select id="sub"></select></label><label>Date (Mon–Fri)<input type="date" id="dt"></label>
+    <button class="btn ghost" id="allP">All Present</button></div>
+    <p class="hint"><span id="day"></span><span id="sum"></span></p>
+    <table><thead><tr><th>Student</th><th>Key</th><th>Status</th></tr></thead><tbody id="sheet"></tbody></table>
+    <button class="btn" id="save">Save Attendance</button>
+  </div>
+  <div id="t-rep" class="card" hidden>
+    <div class="stats" id="stats"></div>
+    <div class="row"><button class="btn" id="pdfRep">Download Report PDF</button></div>
+    <div class="scroll"><table id="repTbl"></table></div>
+  </div>
+  <div id="t-def" class="card" hidden>
+    <div class="row"><label>Minimum %<input type="number" id="th" value="75" min="1" max="100"></label>
+    <button class="btn ghost" id="loadDef">Generate</button><button class="btn" id="pdfDef">Download Defaulter PDF</button></div>
+    <div class="scroll"><table id="defTbl"></table></div>
+  </div>
+</section>
+
+<section id="student" hidden class="card">
+  <h2>My Attendance</h2><div id="stat"></div><div class="scroll"><table id="myTbl"></table></div>
+</section>
+</main>
+<div id="toast"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<script src="app.js"></script>
+</body></html>
